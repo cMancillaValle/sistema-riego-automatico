@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body, #root {
+    background-color: #000000;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-touch-callout: none;

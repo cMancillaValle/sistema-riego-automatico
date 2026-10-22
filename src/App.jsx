@@ -201,8 +201,8 @@ export default function App() {
     }
   };
 
-  // Cálculo para el Gauge SVG circular (arco semicircular minimalista)
-  const radius = 64;
+  // Cálculo para el Gauge SVG circular (arco minimalista)
+  const radius = 66;
   const stroke = 10;
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -221,18 +221,18 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-black text-black font-sans flex justify-center items-start sm:py-6 antialiased selection:bg-brand-green selection:text-black">
-      {/* Contenedor Mockup Móvil Estilo App Nativa */}
-      <div className="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:rounded-[36px] shadow-2xl flex flex-col justify-between overflow-hidden relative border border-black/10">
+      {/* Contenedor Mockup Móvil Estilo App Nativa con Borde Negro Reforzado */}
+      <div className="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:rounded-[36px] shadow-2xl flex flex-col justify-between overflow-hidden relative border-[3px] border-black sm:border-4">
         
-        {/* ================= HEADER TIPO SMARTPHONE NATIVO ================= */}
-        <header className="bg-black text-white px-5 pt-4 pb-3 flex flex-col border-b border-neutral-900 sticky top-0 z-30">
-          <div className="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
+        {/* ================= HEADER TIPO SMARTPHONE NATIVO (FONDO NEGRO CONTINUO) ================= */}
+        <header className="bg-black text-white px-5 pt-[max(1.25rem,env(safe-area-inset-top))] pb-3.5 flex flex-col border-b-2 border-black sticky top-0 z-30">
+          <div className="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2.5">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
               <span className="font-semibold text-white tracking-wider">EDGE CLOUDFLARE</span>
             </div>
             <div className="flex items-center gap-2">
-              <span>{telemetry.systemVoltage}V</span>
+              <span className="text-neutral-300 font-mono">{telemetry.systemVoltage}V</span>
               <button 
                 onClick={toggleFullScreen}
                 title="Modo Pantalla Completa"
@@ -249,8 +249,8 @@ export default function App() {
                 <Sprout size={20} className="text-black" />
               </div>
               <div>
-                <h1 className="text-base font-bold tracking-tight text-white flex items-center gap-1.5 leading-none">
-                  AgroSmart <span className="text-[10px] bg-brand-green text-black font-bold px-1.5 py-0.5 rounded">IoT</span>
+                <h1 className="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5 leading-none">
+                  Rieggo <span className="text-[10px] bg-brand-green text-black font-bold px-1.5 py-0.5 rounded">IoT</span>
                 </h1>
                 <p className="text-[11px] text-neutral-400 mt-0.5 font-medium">Riego Autónomo & Monitoreo</p>
               </div>
@@ -275,7 +275,7 @@ export default function App() {
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           
           {/* BANNER DE ESTADO RÁPIDO */}
-          <div className="flex items-center justify-between bg-neutral-100 rounded-2xl px-4 py-2.5 border border-black/5 text-xs">
+          <div className="flex items-center justify-between bg-neutral-100 rounded-2xl px-4 py-2.5 border border-black/10 text-xs shadow-sm">
             <div className="flex items-center gap-2 truncate">
               <Activity size={14} className="text-brand-green shrink-0" />
               <span className="font-medium text-black truncate">{lastActionMessage}</span>
@@ -289,10 +289,10 @@ export default function App() {
             </button>
           </div>
 
-          {/* ================= GAUGE MINIMALISTA DE HUMEDAD ================= */}
+          {/* ================= GAUGE MINIMALISTA DE HUMEDAD REFINADO ================= */}
           <div className="bg-white rounded-3xl p-5 border-2 border-black shadow-[0_4px_20px_rgba(0,0,0,0.04)] relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold uppercase tracking-widest text-neutral-500 flex items-center gap-1.5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-neutral-600 flex items-center gap-1.5">
                 <Droplets size={14} className="text-black" />
                 Humedad de Suelo
               </span>
@@ -302,64 +302,74 @@ export default function App() {
             </div>
 
             {/* Visualizador Circular SVG Minimalista */}
-            <div className="flex items-center justify-center py-2 relative">
-              <div className="relative w-36 h-36 flex items-center justify-center">
-                <svg className="w-full h-full transform -rotate-90">
-                  {/* Círculo base de fondo */}
-                  <circle
-                    stroke="#f4f4f5"
-                    fill="transparent"
-                    strokeWidth={stroke}
-                    r={normalizedRadius}
-                    cx={radius}
-                    cy={radius}
-                  />
-                  {/* Círculo de progreso verde/negro */}
-                  <circle
-                    stroke="#10b981"
-                    fill="transparent"
-                    strokeWidth={stroke}
-                    strokeDasharray={circumference + ' ' + circumference}
-                    style={{ strokeDashoffset, transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
-                    strokeLinecap="round"
-                    r={normalizedRadius}
-                    cx={radius}
-                    cy={radius}
-                  />
-                </svg>
+            <div className="flex flex-col items-center justify-center py-2 relative">
+              <div className="flex items-center justify-center w-full">
+                <div className="relative w-36 h-36 flex items-center justify-center shrink-0">
+                  <svg className="w-full h-full transform -rotate-90">
+                    {/* Círculo base de fondo */}
+                    <circle
+                      stroke="#f4f4f5"
+                      fill="transparent"
+                      strokeWidth={stroke}
+                      r={normalizedRadius}
+                      cx={radius}
+                      cy={radius}
+                    />
+                    {/* Círculo de progreso verde */}
+                    <circle
+                      stroke="#10b981"
+                      fill="transparent"
+                      strokeWidth={stroke}
+                      strokeDasharray={circumference + ' ' + circumference}
+                      style={{ strokeDashoffset, transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                      strokeLinecap="round"
+                      r={normalizedRadius}
+                      cx={radius}
+                      cy={radius}
+                    />
+                  </svg>
 
-                {/* Lectura en el centro */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <span className="text-3xl font-extrabold text-black font-mono tracking-tighter">
-                    {telemetry.humidity.toFixed(1)}%
-                  </span>
-                  <span className="text-[10px] text-neutral-500 uppercase font-semibold tracking-wider">
-                    Capacitivo V1.2
-                  </span>
+                  {/* Lectura numérica en el centro sin elementos apretados */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span className="text-3xl font-extrabold text-black font-mono tracking-tighter">
+                      {telemetry.humidity.toFixed(1)}%
+                    </span>
+                    <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">
+                      HUMEDAD
+                    </span>
+                  </div>
+                </div>
+
+                {/* Parámetros laterales de referencia */}
+                <div className="ml-5 flex flex-col justify-center space-y-2.5 text-xs">
+                  <div className="border-l-2 border-brand-green pl-2.5">
+                    <p className="text-[10px] text-neutral-500 font-medium">Umbral Objetivo</p>
+                    <p className="text-sm font-bold text-black font-mono">{substrateConfig.target}%</p>
+                  </div>
+                  <div className="border-l-2 border-black pl-2.5">
+                    <p className="text-[10px] text-neutral-500 font-medium">Umbral Mínimo</p>
+                    <p className="text-sm font-bold text-black font-mono">{substrateConfig.min}%</p>
+                  </div>
+                  <div className="border-l-2 border-neutral-300 pl-2.5">
+                    <p className="text-[10px] text-neutral-500 font-medium">Sustrato Activo</p>
+                    <p className="text-xs font-semibold text-black uppercase">{substrateConfig.name}</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Parámetros laterales de referencia */}
-              <div className="ml-5 flex flex-col justify-center space-y-2 text-xs">
-                <div className="border-l-2 border-brand-green pl-2.5">
-                  <p className="text-[10px] text-neutral-500 font-medium">Umbral Objetivo</p>
-                  <p className="text-sm font-bold text-black font-mono">{substrateConfig.target}%</p>
-                </div>
-                <div className="border-l-2 border-black pl-2.5">
-                  <p className="text-[10px] text-neutral-500 font-medium">Umbral Mínimo</p>
-                  <p className="text-sm font-bold text-black font-mono">{substrateConfig.min}%</p>
-                </div>
-                <div className="border-l-2 border-neutral-300 pl-2.5">
-                  <p className="text-[10px] text-neutral-500 font-medium">Sustrato Activo</p>
-                  <p className="text-xs font-semibold text-black uppercase">{substrateConfig.name}</p>
-                </div>
+              {/* Tag del sensor perfectamente legible y centrado */}
+              <div className="mt-3 inline-flex items-center gap-1.5 bg-neutral-100 border border-black/10 px-3 py-1 rounded-full shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
+                <span className="text-[11px] font-mono font-semibold text-neutral-800">
+                  Sensor Capacitivo V1.2
+                </span>
               </div>
             </div>
 
             {/* Barra de progreso lineal sutil */}
             <div className="mt-2 pt-3 border-t border-neutral-100 flex items-center justify-between text-[11px] text-neutral-500">
               <span>0% (Seco)</span>
-              <span className="font-mono text-black font-semibold">Sensor: Activo por pulsos</span>
+              <span className="font-mono text-black font-semibold">Excitación por pulsos</span>
               <span>100% (Saturado)</span>
             </div>
           </div>
@@ -370,7 +380,7 @@ export default function App() {
             <div className={`p-4 rounded-2xl border-2 transition-all ${
               telemetry.pumpState 
                 ? 'border-brand-green bg-brand-green/10 shadow-sm' 
-                : 'border-black/10 bg-neutral-50'
+                : 'border-black/15 bg-neutral-50'
             }`}>
               <div className="flex items-center justify-between mb-2">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
@@ -392,7 +402,7 @@ export default function App() {
             <div className={`p-4 rounded-2xl border-2 transition-all ${
               telemetry.valveState 
                 ? 'border-brand-green bg-brand-green/10 shadow-sm' 
-                : 'border-black/10 bg-neutral-50'
+                : 'border-black/15 bg-neutral-50'
             }`}>
               <div className="flex items-center justify-between mb-2">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
@@ -411,48 +421,48 @@ export default function App() {
             </div>
           </div>
 
-          {/* ================= CAUDALÍMETRO EFECTO HALL & LITROS ================= */}
-          <div className="bg-black text-white rounded-3xl p-4.5 border border-black shadow-lg">
-            <div className="flex items-center justify-between pb-3 border-b border-neutral-800">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-brand-green">
-                  <Activity size={15} />
+          {/* ================= CAUDALÍMETRO EFECTO HALL & LITROS REAJUSTADO ================= */}
+          <div className="bg-black text-white rounded-3xl p-5 border-2 border-black shadow-lg">
+            <div className="flex items-center justify-between pb-3.5 border-b border-neutral-800">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-brand-green shrink-0">
+                  <Activity size={16} />
                 </div>
                 <div>
                   <h2 className="text-xs font-bold text-white uppercase tracking-wider">Caudalímetro YF-S201</h2>
                   <p className="text-[10px] text-neutral-400">Sensor de Pulsos Efecto Hall</p>
                 </div>
               </div>
-              <span className="text-[10px] font-mono text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded-md">
+              <span className="text-[10px] font-mono font-semibold text-brand-green bg-brand-green/10 border border-brand-green/30 px-2.5 py-0.5 rounded-md">
                 K = 7.5
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-3">
-              <div>
+            <div className="grid grid-cols-2 gap-3 pt-3.5">
+              <div className="bg-neutral-900/90 rounded-2xl p-3 border border-neutral-800 flex flex-col justify-between">
                 <p className="text-[10px] text-neutral-400 font-medium">Caudal Instantáneo</p>
-                <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-2xl font-black font-mono text-white">
+                <div className="flex items-baseline gap-1 mt-1.5">
+                  <span className="text-xl sm:text-2xl font-black font-mono text-white tracking-tight">
                     {telemetry.flowRate.toFixed(2)}
                   </span>
-                  <span className="text-xs text-brand-green font-semibold">L/min</span>
+                  <span className="text-[11px] text-brand-green font-semibold">L/min</span>
                 </div>
               </div>
 
-              <div>
+              <div className="bg-neutral-900/90 rounded-2xl p-3 border border-neutral-800 flex flex-col justify-between">
                 <p className="text-[10px] text-neutral-400 font-medium">Consumo Acumulado</p>
-                <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-2xl font-black font-mono text-white">
+                <div className="flex items-baseline gap-1 mt-1.5">
+                  <span className="text-xl sm:text-2xl font-black font-mono text-white tracking-tight">
                     {telemetry.totalLiters.toFixed(2)}
                   </span>
-                  <span className="text-xs text-brand-green font-semibold">Litros</span>
+                  <span className="text-[11px] text-brand-green font-semibold">Litros</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* ================= SUBRUTINA DE CUIDADO DEL SENSOR ================= */}
-          <div className="bg-white rounded-2xl p-4 border border-black/10 flex items-center justify-between">
+          <div className="bg-white rounded-2xl p-4 border border-black/15 flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-9 h-9 rounded-xl bg-neutral-100 flex items-center justify-center text-black border border-black/10">
@@ -475,14 +485,14 @@ export default function App() {
 
             <div className="text-right">
               <span className="text-[10px] text-neutral-400 font-mono block">Próximo pulso</span>
-              <span className="text-xs font-black font-mono text-black bg-neutral-100 px-2 py-1 rounded-md border border-black/5">
+              <span className="text-xs font-black font-mono text-black bg-neutral-100 px-2 py-1 rounded-md border border-black/10">
                 {pulseCounter}s
               </span>
             </div>
           </div>
 
           {/* ================= MODO DEMOSTRACIÓN EN VIVO (TOUCHPAD) ================= */}
-          <div className="bg-neutral-50 rounded-3xl p-4 border border-black/15">
+          <div className="bg-neutral-50 rounded-3xl p-4 border border-black/15 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-1.5">
                 <Sliders size={14} className="text-black" />
@@ -576,10 +586,10 @@ export default function App() {
         </div>
 
         {/* ================= FOOTER / NAVEGACIÓN INFERIOR MÓVIL ================= */}
-        <footer className="bg-white border-t border-black/10 px-5 py-3 flex items-center justify-between text-xs text-neutral-500">
+        <footer className="bg-white border-t-2 border-black px-5 py-3 flex items-center justify-between text-xs text-neutral-500">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-green"></span>
-            <span className="font-mono text-[11px] text-black font-semibold">PWA Ready • Cloudflare Pages</span>
+            <span className="font-mono text-[11px] text-black font-semibold">Rieggo PWA • Cloudflare Pages</span>
           </div>
           <span className="text-[10px] text-neutral-400 font-mono">
             {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
