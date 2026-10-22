@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="128" fill="#0a0a0a"/>
+  <!-- Droplet outline & leaf -->
+  <path d="M256 96 C256 96 160 220 160 316 C160 369 203 412 256 412 C309 412 352 369 352 316 C352 220 256 96 256 96 Z" fill="#10b981"/>
+  <!-- Inner leaf vein in white -->
+  <path d="M256 160 C256 220 256 370 256 370" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+  <path d="M256 260 C280 240 300 242 300 242" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+  <path d="M256 300 C230 285 212 288 212 288" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+</svg>
